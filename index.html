@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oratória Descomplicada | Rafael Telini</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090A0F',
+                        cardBg: '#12151E',
+                        cardBorder: '#222838',
+                        goldPrimary: '#F59E0B',
+                        goldLight: '#FCD34D',
+                        accentCyan: '#06B6D4',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Outfit"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 30px -5px rgba(245, 158, 11, 0.3)',
+                        'cyan-glow': '0 0 30px -5px rgba(6, 182, 212, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090A0F;
+            color: #F3F4F6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(18, 21, 30, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-cyan {
+            background: linear-gradient(135deg, #67E8F9 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, rgba(9,10,15,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 selection:bg-amber-500 selection:text-black" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-microphone-lines text-black text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-heading font-bold text-lg tracking-wide block leading-tight text-white">ORATÓRIA</span>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Descomplicada</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#problema" class="hover:text-amber-400 transition-colors">O Desafio</a>
+                <a href="#metodo" class="hover:text-amber-400 transition-colors">O Método</a>
+                <a href="#modulos" class="hover:text-amber-400 transition-colors">Conteúdo</a>
+                <a href="#autor" class="hover:text-amber-400 transition-colors">Rafael Telini</a>
+                <a href="#depoimentos" class="hover:text-amber-400 transition-colors">Resultados</a>
+                <a href="#faq" class="hover:text-amber-400 transition-colors">FAQ</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://pay.kiwify.com.br/f4pAnr3" target="_blank" rel="noopener noreferrer" class="relative group inline-flex items-center justify-center px-6 py-3 text-sm font-bold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 rounded-xl shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+                    <span>Garantir Minha Vaga</span>
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-slate-300 hover:text-white p-2 focus:outline-none">
+                <i :class="mobileMenuOpen ? 'fa-solid fa-xmark text-2xl' : 'fa-solid fa-bars text-2xl'"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden glass-panel border-b border-white/10 px-6 py-6 space-y-4">
+            <a @click="mobileMenuOpen = false" href="#problema" class="block text-slate-300 hover:text-amber-400 font-medium py-1">O Desafio</a>
+            <a @click="mobileMenuOpen = false" href="#metodo" class="block text-slate-300 hover:text-amber-400 font-medium py-1">O Método</a>
+            <a @click="mobileMenuOpen = false" href="#modulos" class="block text-slate-300 hover:text-amber-400 font-medium py-1">Conteúdo</a>
+            <a @click="mobileMenuOpen = false" href="#autor" class="block text-slate-300 hover:text-amber-400 font-medium py-1">Rafael Telini</a>
+            <a @click="mobileMenuOpen = false" href="#depoimentos" class="block text-slate-300 hover:text-amber-400 font-medium py-1">Resultados</a>
+            <a @click="mobileMenuOpen = false" href="#faq" class="block text-slate-300 hover:text-amber-400 font-medium py-1">FAQ</a>
+            <div class="pt-2">
+                <a @click="mobileMenuOpen = false" href="https://pay.kiwify.com.br/f4pAnr3" target="_blank" rel="noopener noreferrer" class="block text-center w-full py-3 text-sm font-bold uppercase text-black bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl shadow-lg shadow-amber-500/30">Quero Dominar a Oratória</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+            <!-- Background Glows -->
+            <div class="hero-glow top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Left Content -->
+                    <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                        
+                        <!-- Badge -->
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest shadow-lg shadow-amber-500/5">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                            Métorre Definitivo de Comunicação de Alta Performance
+                        </div>
+
+                        <!-- Main Headline -->
+                        <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                            Domine a Arte de Falar em Público com <span class="gradient-text">Clareza e Autoridade</span>
+                        </h1>
+
+                        <!-- Subtitle -->
+                        <p class="text-lg sm:text-xl text-slate-300 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Supere o medo, elimine o branco na mente e transforme sua comunicação em uma arma magnética de persuasão e liderança com o método de Rafael Telini.
+                        </p>
+
+                        <!-- CTA Group -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="https://pay.kiwify.com.br/f4pAnr3" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-5 text-base font-bold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 rounded-2xl shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-105 active:scale-95 transition-all duration-200 group">
+                                <span>Quero Dominar a Oratória</span>
+                                <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-1.5 transition-transform"></i>
+                            </a>
+                            <a href="#metodo" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-5 text-base font-semibold text-white glass-panel rounded-2xl hover:bg-white/10 transition-all duration-200">
+                                <i class="fa-solid fa-play text-amber-400 mr-2.5"></i> Conhecer o Método
+                            </a>
+                        </div>
+
+                        <!-- Quick Social Proof Badges -->
+                        <div class="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-amber-400"></i>
+                                <span>Mais de <strong>50 alunos</strong> transformados</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-star text-amber-400"></i>
+                                <span>Avaliação <strong>4.9/5.0</strong> em aprovação</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Hero Right Visual Mockup -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <!-- Floating Card Top -->
+                            <div class="absolute -top-6 -left-6 z-20 glass-panel p-4 rounded-2xl shadow-glass border border-white/10 animate-bounce duration-1000 hidden sm:flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Zero Medo</p>
+                                    <p class="text-sm font-bold text-white">Confiança Instantânea</p>
+                                </div>
+                            </div>
+
+                            <!-- Main Mockup Card -->
+                            <div class="glass-panel p-8 rounded-3xl shadow-2xl relative overflow-hidden border border-amber-500/20 group">
+                                <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-cyan-500/15 pointer-events-none"></div>
+                                
+                                <div class="relative z-10 space-y-6">
+                                    <div class="flex items-center justify-between">
+                                        <span class="px-3 py-1 bg-amber-400/10 text-amber-400 border border-amber-400/30 rounded-full text-xs font-bold uppercase">Formação Premium</span>
+                                        <span class="text-xs text-slate-400 font-medium">Acesso Vitalício</span>
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <h3 class="font-heading text-2xl font-bold text-white">Oratória Descomplicada</h3>
+                                        <p class="text-sm text-slate-300">O guia definitivo para você se expressar com clareza inabalável em reuniões, palestras, vídeos e negociações.</p>
+                                    </div>
+
+                                    <div class="space-y-3 py-2">
+                                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                                            <i class="fa-solid fa-check text-amber-400"></i>
+                                            <span>Módulos práticos passo a passo</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                                            <i class="fa-solid fa-check text-amber-400"></i>
+                                            <span>Técnicas de linguagem corporal</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                                            <i class="fa-solid fa-check text-amber-400"></i>
+                                            <span>Imersão em inteligência emocional</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs text-slate-400 block">Investimento único</span>
+                                            <span class="text-2xl font-extrabold text-amber-400 font-heading">3x de R$ 10,47</span>
+                                        </div>
+                                        <span class="text-xs text-slate-400 font-semibold bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">ou R$ 19,90 à vista</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Card Bottom -->
+                            <div class="absolute -bottom-6 -right-6 z-20 glass-panel p-4 rounded-2xl shadow-glass border border-white/10 hidden sm:flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Certificado</p>
+                                    <p class="text-sm font-bold text-white">Reconhecido no Mercado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- O Problema / A Dor -->
+        <section id="problema" class="py-24 relative bg-darkBg/60 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20">Identifique-se</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">Você já perdeu oportunidades por não saber se posicionar?</h2>
+                    <p class="text-slate-400 text-base sm:text-lg">O medo de falar em público não é apenas um incômodo; é uma barreira invisível que trava sua ascensão profissional e pessoal.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white">O Frio na Barriga Extremo</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">As mãos soam, o coração dispara e a respiração acelera só de pensar em levantar a voz em uma reunião ou apresentação.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white">O "Branco" na Mente</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Você domina o assunto na teoria, mas na hora de falar parece que as palavras somem e você esquece tudo o que preparou.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-ranking-star"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white">Oportunidades Perdidas</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Promoções, vendas importantes e reconhecimento entregues a pessoas menos competentes, mas que sabem se comunicar melhor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A Solução (O Método) -->
+        <section id="metodo" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20">A Revolução na Comunicação</span>
+                        <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+                            Conheça o Método <span class="gradient-cyan">Oratória Descomplicada</span>
+                        </h2>
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                            Desenvolvido por Rafael Telini após anos de experiência prática e milhares de mentorias. Um sistema validado para transformar qualquer pessoa em um comunicador magnético, sem fórmulas engessadas ou discursos robóticos.
+                        </p>
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white">Simplicidade e Praticidade</h4>
+                                    <p class="text-sm text-slate-400">Técnicas diretas ao ponto que você aplica logo na primeira aula.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white">Autenticidade em Primeiro Lugar</h4>
+                                    <p class="text-sm text-slate-400">Desenvolva seu próprio estilo de liderança sem precisar fingir ser quem você não é.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-white/10 relative overflow-hidden space-y-6">
+                            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                            
+                            <h3 class="font-heading text-2xl font-bold text-white">Os 3 Pilares da Transformação</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4">
+                                    <span class="text-2xl font-extrabold text-amber-400 font-heading">01</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-base">Controle Emocional</h4>
+                                        <p class="text-xs text-slate-400">Neutralize a ansiedade e transforme o nervosismo em energia combustível.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4">
+                                    <span class="text-2xl font-extrabold text-cyan-400 font-heading">02</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-base">Estrutura Magnética</h4>
+                                        <p class="text-xs text-slate-400">Aprenda a organizar seus pensamentos e prender a atenção do público do início ao fim.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4">
+                                    <span class="text-2xl font-extrabold text-amber-400 font-heading">03</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-base">Expressão e Autoridade</h4>
+                                        <p class="text-xs text-slate-400">Domínio da voz, tom, entonação e linguagem corporal que transmitem respeito imediato.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- O que Você Vai Aprender (Módulos) -->
+        <section id="modulos" class="py-24 bg-darkBg/60 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20">Conteúdo Completo</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">O que Você Vai Dominar no Curso</h2>
+                    <p class="text-slate-400 text-base sm:text-lg">Módulos estruturados para levar você do zero ao domínio absoluto da oratória.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Module 1 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M1
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Estrutura de Discurso Infalível</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Como estruturar introduções impactantes, desenvolvimento coeso e conclusões que geram ação imediata.</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-book-open mr-2"></i> Módulo Prático
+                        </div>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M2
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Linguagem Corporal de Alta Influência</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Domine posturas corporais, gestos intencionais e contato visual que transmitem poder e segurança.</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-cyan-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-video mr-2"></i> Vídeo Aulas Exclusivas
+                        </div>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M3
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Inteligência Emocional e Controle</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Técnicas de respiração e mindset para eliminar o medo do julgamento alheio e o famoso "branco".</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-brain mr-2"></i> Ferramentas Mentais
+                        </div>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M4
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Técnicas de Persuasão e Retórica</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Gatilhos mentais éticos e argumentos lógicos que convencem e movem pessoas rumo ao seu objetivo.</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-cyan-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-bullhorn mr-2"></i> Poder de Persuasão
+                        </div>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M5
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Storytelling Magnético</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">A arte de contar histórias envolventes que geram conexão profunda e prendem a atenção de qualquer plateia.</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-feather mr-2"></i> Técnicas de Roteiro
+                        </div>
+                    </div>
+
+                    <!-- Module 6 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg font-heading">
+                                M6
+                            </div>
+                            <h3 class="font-heading text-xl font-bold text-white">Oratória para Câmeras e Vídeos</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Como se destacar em reuniões online, gravações de cursos, Instagram, YouTube e podcasts com naturalidade.</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 text-xs text-cyan-400 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-camera mr-2"></i> Era Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre o Autor (Rafael Telini) -->
+        <section id="autor" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="glass-panel p-8 sm:p-14 rounded-3xl border border-white/10 relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative mx-auto max-w-sm rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30 group">
+                                <img src="https://placehold.co/600x750/12151F/F59E0B?text=Rafael+Telini" alt="Rafael Telini" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent"></div>
+                                <div class="absolute bottom-6 left-6 right-6 text-center">
+                                    <h4 class="font-heading text-xl font-bold text-white">Rafael Telini</h4>
+                                    <p class="text-xs text-amber-400 font-medium">Especialista em Comunicação e Oratória</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20">Seu Mentor</span>
+                            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Quem é Rafael Telini?</h2>
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                                Rafael Telini é referência em oratória e comunicação de alta performance.
+                            </p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Através do método <strong>Oratória Descomplicada</strong>, Rafael uni neurociência, técnicas teatrais de presença e retórica clássica em um formato moderno, objetivo e altamente aplicável para o mercado atual.
+                            </p>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-4 border-t border-white/10">
+                                <div>
+                                    <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400 font-heading">+50</span>
+                                    <span class="text-xs text-slate-400 font-medium">Alunos Capacitados</span>
+                                </div>
+                                <div>
+                                    <span class="block text-2xl sm:text-3xl font-extrabold text-cyan-400 font-heading">+5 Anos</span>
+                                    <span class="text-xs text-slate-400 font-medium">de Experiência</span>
+                                </div>
+                                <div>
+                                    <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400 font-heading">95%</span>
+                                    <span class="text-xs text-slate-400 font-medium">Índice de Sucesso</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos / Prova Social -->
+        <section id="depoimentos" class="py-24 bg-darkBg/60 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20">Histórias Reais</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">O que Nossos Alunos Estão Dizendo</h2>
+                    <p class="text-slate-400 text-base sm:text-lg">Veja como a Oratória Descomplicada mudou a carreira de quem já aplicou o método.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-6 border border-white/5 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 text-sm gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                "Eu travava completamente em reuniões de diretoria. Depois do módulo de controle emocional e estrutura do Rafael, fui promovido a gerente em menos de 3 meses. Incrível!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center font-heading">
+                                CM
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-white text-sm">Carlos Mendes</h4>
+                                <p class="text-xs text-slate-400">Gerente Comercial</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-6 border border-white/5 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 text-sm gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                "O curso é direto ao ponto, sem enrolação. Aprendi a falar em público sem medo e hoje consigo gravar vídeos para o meu Instagram com muita naturalidade e autoridade."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                            <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center font-heading">
+                                AS
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-white text-sm">Ana Souza</h4>
+                                <p class="text-xs text-slate-400">Empreendedora</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="glass-panel p-8 rounded-3xl space-y-6 border border-white/5 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex text-amber-400 text-sm gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                "Rafael Telini tem uma didática fantástica. As técnicas de storytelling abriram minha mente para fechar contratos maiores e apresentar palestras de grande porte."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center font-heading">
+                                RL
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-white text-sm">Rodrigo Lima</h4>
+                                <p class="text-xs text-slate-400">Consultor e Palestrante</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Garantia Incondicional -->
+        <section class="py-20 relative">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-amber-500/30 text-center relative overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10 pointer-events-none"></div>
+                    
+                    <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+                        <div class="w-20 h-20 rounded-3xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-4xl mx-auto shadow-lg shadow-amber-500/20">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Garantia Incondicional de 7 Dias</h2>
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                            Seu risco é absolutamente zero. Inscreva-se hoje, assista às aulas e aplique as técnicas por 7 dias. Se por qualquer motivo você não ficar 100% satisfeito, basta enviar um único e-mail e devolveremos cada centavo.
+                        </p>
+                        <div class="pt-2">
+                            <a href="https://pay.kiwify.com.br/f4pAnr3" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl shadow-lg shadow-amber-500/30 hover:scale-105 transition-all">
+                                Quero Garantir Minha Vaga Sem Risco
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section id="checkout" class="py-24 bg-darkBg/60 border-t border-white/5 relative">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20">Oferta Especial</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">Sua Transformação Começa Agora</h2>
+                    <p class="text-slate-400">Garanta acesso imediato a todo o treinamento e bônus exclusivos.</p>
+                </div>
+
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-amber-500/40 relative overflow-hidden shadow-gold-glow space-y-8">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-600 text-black text-xs font-extrabold uppercase px-6 py-2 rounded-bl-2xl tracking-wider">
+                        Mais Popular
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white">Oratória Descomplicada Completa</h3>
+                        <p class="text-slate-300 text-sm">Acesso vitalício ao curso + atualizações + bônus exclusivos e certificado digital.</p>
+                    </div>
+
+                    <div class="space-y-3 py-6 border-y border-white/10">
+                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Módulos 1 ao 6 completos com acesso imediato</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Bônus 1: Guia Prático de Storytelling para Redes Sociais</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Bônus 2: Workbook de Exercícios de Respiração e Postura</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-slate-200">
+                            <i class="fa-solid fa-check text-amber-400"></i>
+                            <span>Certificado Oficial de Conclusão assinado por Rafael Telini</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-2">
+                        <span class="text-xs text-slate-400 line-through">De R$ 97,00 por apenas</span>
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="text-sm text-slate-300 font-medium">2x de</span>
+                            <span class="text-4xl sm:text-5xl font-extrabold text-amber-400 font-heading">R$ 10,47</span>
+                        </div>
+                        <span class="text-xs text-slate-400 block font-semibold">ou R$ 19,90 à vista no PIX ou Cartão</span>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="https://pay.kiwify.com.br/f4pAnr3" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-5 text-base font-bold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 rounded-2xl shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-[1.01] active:scale-[0.99] transition-all">
+                            Quero Dominar a Oratória Agora <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <div class="flex items-center justify-center gap-6 mt-6 text-xs text-slate-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-amber-400"></i> Pagamento 100% Seguro</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-400"></i> Acesso Imediato</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ (Perguntas Frequentes) -->
+        <section id="faq" class="py-24 relative" x-data="{ openFaq: null }">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20">Dúvidas Comuns</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">Perguntas Frequentes</h2>
+                    <p class="text-slate-400">Tire todas as suas dúvidas antes de garantir sua vaga.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="glass-panel rounded-2xl border border-white/5 overflow-hidden transition-all">
+                        <button @click="openFaq === 1 ? openFaq = null : openFaq = 1" class="w-full px-6 py-5 text-left font-heading font-bold text-white flex items-center justify-between gap-4 focus:outline-none">
+                            <span>Como terei acesso ao curso?</span>
+                            <i :class="openFaq === 1 ? 'fa-solid fa-chevron-up text-amber-400' : 'fa-solid fa-chevron-down text-slate-400'" class="transition-transform"></i>
+                        </button>
+                        <div x-show="openFaq === 1" x-transition class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                            Assim que o pagamento for confirmado (imediatamente para PIX e cartão de crédito), você receberá um e-mail com seus dados de acesso à nossa plataforma exclusiva de membros.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="glass-panel rounded-2xl border border-white/5 overflow-hidden transition-all">
+                        <button @click="openFaq === 2 ? openFaq = null : openFaq = 2" class="w-full px-6 py-5 text-left font-heading font-bold text-white flex items-center justify-between gap-4 focus:outline-none">
+                            <span>Por quanto tempo terei acesso às aulas?</span>
+                            <i :class="openFaq === 2 ? 'fa-solid fa-chevron-up text-amber-400' : 'fa-solid fa-chevron-down text-slate-400'" class="transition-transform"></i>
+                        </button>
+                        <div x-show="openFaq === 2" x-transition class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                            O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser, no seu próprio ritmo, e ainda terá direito a todas as atualizações futuras do curso sem custo adicional.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="glass-panel rounded-2xl border border-white/5 overflow-hidden transition-all">
+                        <button @click="openFaq === 3 ? openFaq = null : openFaq = 3" class="w-full px-6 py-5 text-left font-heading font-bold text-white flex items-center justify-between gap-4 focus:outline-none">
+                            <span>O curso serve para quem é completamente iniciante?</span>
+                            <i :class="openFaq === 3 ? 'fa-solid fa-chevron-up text-amber-400' : 'fa-solid fa-chevron-down text-slate-400'" class="transition-transform"></i>
+                        </button>
+                        <div x-show="openFaq === 3" x-transition class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                            Sim! O método foi desenhado exatamente para tirar qualquer pessoa do absoluto zero até a segurança total ao falar em público, seja em reuniões, palestras ou redes sociais.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="glass-panel rounded-2xl border border-white/5 overflow-hidden transition-all">
+                        <button @click="openFaq === 4 ? openFaq = null : openFaq = 4" class="w-full px-6 py-5 text-left font-heading font-bold text-white flex items-center justify-between gap-4 focus:outline-none">
+                            <span>Como funciona a garantia de 7 dias?</span>
+                            <i :class="openFaq === 4 ? 'fa-solid fa-chevron-up text-amber-400' : 'fa-solid fa-chevron-down text-slate-400'" class="transition-transform"></i>
+                        </button>
+                        <div x-show="openFaq === 4" x-transition class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                            Se você não gostar do conteúdo ou sentir que o curso não é para você dentro do prazo de 7 dias após a compra, basta solicitar o reembolso na plataforma e devolveremos 100% do seu dinheiro sem burocracia.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé Profissional -->
+    <footer class="bg-darkBg border-t border-white/10 py-16 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-6 space-y-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black font-bold">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <div>
+                        <span class="font-heading font-bold text-lg tracking-wide block leading-tight text-white">ORATÓRIA</span>
+                        <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Descomplicada</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-8 text-sm">
+                    <a href="#problema" class="hover:text-amber-400 transition-colors">O Desafio</a>
+                    <a href="#metodo" class="hover:text-amber-400 transition-colors">O Método</a>
+                    <a href="#modulos" class="hover:text-amber-400 transition-colors">Conteúdo</a>
+                    <a href="#autor" class="hover:text-amber-400 transition-colors">Rafael Telini</a>
+                    <a href="#faq" class="hover:text-amber-400 transition-colors">FAQ</a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 text-center space-y-4">
+                <p class="text-xs text-slate-500 max-w-3xl mx-auto leading-relaxed">
+                    Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site. Fazemos todos os esforços para indicar claramente e mostrar todas as provas do produto e usamos resultados reais.
+                </p>
+                <p class="text-xs text-slate-500">
+                    &copy; 2026 Rafael Telini - Oratória Descomplicada. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html
